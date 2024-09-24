@@ -24,19 +24,23 @@ int main()
   std::cout << "Temps parallel omp for: " << tempsOmpFor.count() << "s\n";
 
   // Calculer le pi avec omp for et reduction
-  auto start = std::chrono::high_resolution_clock::now();
-#pragma omp parallel for reduction(+:pi)
-  for (i = 0; i < N; i++) {
-    pi = pi + s * (f(i * s) + f((i + 1) * s)) / 2;
-  }  
+  pi = 0.0;
+  start = std::chrono::high_resolution_clock::now();
+#pragma omp parallel default(none) shared(pi, s)
+  {
+#pragma omp for reduction(+:pi)
+    for (int i = 0; i < N; i++) {
+      pi = pi + s * (f(i * s) + f((i + 1) * s)) / 2;
+    }  
+  }
   std::cout << "pi = " << pi << std::endl;
-  std::chrono::duration<double> tempsOmpFor = std::chrono::high_resolution_clock::now() - start;
+  tempsOmpFor = std::chrono::high_resolution_clock::now() - start;
   std::cout << "Temps parallel omp for: " << tempsOmpFor.count() << "s\n";
 
   // Calculer le pi avec boucle parallele faite a la main
   pi = 0.0;
   start = std::chrono::high_resolution_clock::now();
-#pragma omp parallel 
+#pragma omp parallel default(none) shared(pi, s)
   {
     int thId = omp_get_thread_num();
     int numTh = omp_get_num_threads();
