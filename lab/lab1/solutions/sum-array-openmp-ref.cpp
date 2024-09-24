@@ -11,7 +11,7 @@ int main()
   double sum = 0.0;
 
   auto start = std::chrono::high_resolution_clock::now();
-#pragma omp parallel
+#pragma omp parallel default(none) shared(A, sum, i, N)
   {
 #pragma omp for
     for (i = 0; i < N; i++) {
