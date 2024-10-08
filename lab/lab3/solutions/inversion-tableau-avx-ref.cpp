@@ -50,10 +50,8 @@ int main(int argc, char **argv)
     int i = 0; // L'indice qui parcourt le cote gauche
     int j = dim - 8; // L'indice qui parcourt le cote droit
     for (; i < j; i += 8, j -= 8) {
-      __m256 gauche = _mm256_permutevar8x32_ps(_mm256_load_ps(tab + i), permIdx);
-      __m256 droite = _mm256_permutevar8x32_ps(_mm256_load_ps(tab + j), permIdx);
-      _mm256_store_ps(tab + j, gauche);
-      _mm256_store_ps(tab + i, droite);
+      _mm256_store_ps(tab + j, _mm256_permutevar8x32_ps(_mm256_load_ps(tab + i), permIdx));
+      _mm256_store_ps(tab + i, _mm256_permutevar8x32_ps(_mm256_load_ps(tab + j), permIdx));
     }
     if (i == j) { // Si la taille du tableau n'est pas un multiple de 16, renverser le milieu en place
       _mm256_store_ps(tab + i, _mm256_permutevar8x32_ps(_mm256_load_ps(tab + i), permIdx));
