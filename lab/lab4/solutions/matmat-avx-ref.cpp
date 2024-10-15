@@ -271,15 +271,14 @@ int main(int argc, char **argv)
       // TODO / A FAIRE ...
 #pragma omp parallel default(none) shared(A, B, C, B1, B2, N)
       {
-#pragma omp single
+#pragma omp for collapse(2)
         for (int i = 0; i < N; i += B2) {
-          for (int k = 0; k < N; k += B2) {
             for (int j = 0; j < N; j += B2) {
+              for (int k = 0; k < N; k += B2) {
 #pragma omp task default(none) shared(A, B, C, N, B1, B2) firstprivate(i, j, k) depend(in:A[i*N+k]) \
               depend(in:B[k*N+j]) depend(in:C[i*N+j]) depend(out:C[i*N+j])
               {
                 __m256 atile[8], btile[8], ctile[8];
-                float *tA, *tB, *tC;
                 for (int i2 = i; i2 < i + B2; i2 += B1) {
                   for (int k2 = k; k2 < k + B2; k2 += B1) {
                     for (int j2 = j; j2 < j + B2; j2 += B1) {
