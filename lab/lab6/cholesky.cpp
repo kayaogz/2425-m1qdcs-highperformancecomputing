@@ -94,22 +94,6 @@ extern "C" void dsyrk_(
   double *C,
   int *ldc);
 
-// Lower/upper triangular system solve for a block of column vectors
-// Resolution d'un systeme triangulaire inferieure/superieure pour un bloc de vecteur de colonne 
-// L B_new = B, U B_new = B (BLAS3)
-extern "C" void dtrsm_(
-  char *side,
-  char *uplo,
-  char *transA,
-  char *diag,
-  int *m,
-  int *n,
-  double *alpha,
-  double *A,
-  int *lda,
-  double *B,
-  int *ldb);
-
 // Cholesky factorization L L^T = A or U UˆT = A (LAPACK). A is overwritten by L or L^T
 // Once computed, you can solve A x = b as follows:
 // Factorisation Cholesky L L^T = A or U UˆT = A (LAPACK). A est surecrit par L ou L^T
@@ -124,15 +108,6 @@ extern "C" void dpotrf_(
   double *A,
   int *lda,
   int *info);
-
-// Cholesky factorization of a small block of matrix; use only when n is small
-// Factorisation Cholesky pour un petit bloc de matrice; a utiliser seulement si n est petit
-extern "C" void dpotf2_(
-    char *uplo,
-    int *n,
-    double *A,
-    int *lda,
-    int *info);
 
 void printMatrix(
   double *A,
@@ -183,16 +158,6 @@ int main()
   // computing (b - b2) using daxpy, and computing the norm of this vector~(which is the error) by dnrm2
   // Verifier la solution x en calculant b2 = A x avec dgemv, puis en le comparant au second membre initial en calculant
   // (b - b2) avec daxpy d'abord, en suite en calculant la norme de ce vecteur~(ce qui est l'erreur) avec dnrm2.
-  // TODO / A FAIRE
-
-  // Now implement a blocked version of the potrf yourself using dpotf2, dtrsm, dsyrk, and dgemm routines, using block
-  // size BS.
-  // Use OpenMP Tasks to parallelize the computation, specifying dependencies between operations.
-  // For simplicity, you can assume that N is divisible by BS.
-  // Maintenant, implanter une version tuilee de potrf avec fonctions dpotf2, dtrsm, dsyrk, et dgemm, en utilisant une
-  // taille de tuile BS.
-  // Utiliser OpenMP Tasks afin de paralleliser le calcul, en precisant les dependences entre les operations.
-  // Pour simplicite, Supposer que N est divisible par BS.
   // TODO / A FAIRE
 
   return 0;

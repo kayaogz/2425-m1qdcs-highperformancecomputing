@@ -38,7 +38,7 @@ int main()
 {
   // Allocate matrices A, B, C of size N x N
   // Allouer les matrices A, B, C de taille N x N
-  int N = 8;
+  int N = 4;
   std::vector<double> A(N * N), B(N * N), C(N * N);
 
   // Initialize A(i, j) = i + j, B(i, j) = 1, C(i, j) = 0. Matrices must be column-major in BLAS/LAPACK.
@@ -47,7 +47,7 @@ int main()
     for (int i = 0; i < N; i++) {
       A[i + j * N] = i + j;
       B[i + j * N] = 1.0; // Column-major / Colonne-majeur
-      C[i + j * N] = 0.0; // Column-major / Colonne-majeur
+      C[i + j * N] = 2.0; // Column-major / Colonne-majeur
     }
   }
   char transA = 'N', transB = 'N';
