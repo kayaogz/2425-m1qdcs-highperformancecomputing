@@ -1,4 +1,4 @@
-// Installation: Install openblas-dev in linux, Accelerate framework in Mac to get BLAS and LAPACK functions
+// Installation: Install libopenblas-dev in linux, Accelerate framework in Mac to get BLAS and LAPACK functions
 // Compilation: g++ -O2 cholesky.cpp -o cholesky -fopenmp -lblas -llapack
 // Execution: ./cholesky
 // For more info regarding BLAS/LAPACK functions, c.f. Intel MKL documentation
