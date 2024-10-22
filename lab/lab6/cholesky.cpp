@@ -1,6 +1,6 @@
 // Installation: Install openblas-dev in linux, Accelerate framework in Mac to get BLAS and LAPACK functions
 // Compilation: g++ -O2 cholesky.cpp -o cholesky -fopenmp -lblas -llapack
-// Execution: OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 ./cholesky
+// Execution: ./cholesky
 // For more info regarding BLAS/LAPACK functions, c.f. Intel MKL documentation
 // Pour plus d'information concernant les fonctions dans BLAS/LAPACK, c.f. documentation d'Intel MKL
 //   https://www.intel.com/content/www/us/en/docs/onemkl/developer-reference-fortran/2024-2
