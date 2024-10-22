@@ -133,9 +133,7 @@ int main()
   std::vector<double> x(N), b(N), b2(N);
 
   // Generate a lower-triangular N x N matrix L with random values between 0.0 and 1.0
-	// Optional: Use LAPACK random matrix generator dlatmr
   // Generer une matrice triangulaire inferieure L de taille N x N avec valeurs aleatoires entre 0.0 et 1.0
-  // Optionnel: Utiliser la fonction generatrice de matrice aleatoire dlatmr dans LAPACK
   // TODO / A FAIRE
 
   // Generate a symmetric positive definite matrix A = L * L^T using the dsyrk function (BLAS3)
