@@ -147,7 +147,7 @@ int main(int argc, char **argv)
       }
     }
     std::chrono::duration<double> time = std::chrono::high_resolution_clock::now() - start;
-    std::cout << "Sequential transpose: " << time.count() / NREPET << "s\n";
+    std::cout << "Sequential transpose: " << 1000 * time.count() / NREPET << "ms\n";
     std::cout << "Performance: " << (long long) N * N * sizeof(float) / (1e9 * time.count() / NREPET) << "GB/s\n";
     verify(B, N);
   }
@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 
     }
     std::chrono::duration<double> time = std::chrono::high_resolution_clock::now() - start;
-    std::cout << "AVX transpose: " << time.count() / NREPET << "s\n";
+    std::cout << "AVX transpose: " << 1000 * time.count() / NREPET << "ms\n";
     std::cout << "Performance: " << (long long) N * N * sizeof(float) / (1e9 * time.count() / NREPET) << "GB/s\n";
     verify(B, N);
   }
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
       // TODO / A FAIRE ...
     }
     std::chrono::duration<double> time = std::chrono::high_resolution_clock::now() - start;
-    std::cout << "AVX in-place transpose: " << time.count() << "s\n";
+    std::cout << "AVX in-place transpose: " << 1000 * time.count() / NREPET << "ms\n";
     std::cout << "Performance: " << (long long) N * N * sizeof(float) / (1e9 * time.count() / NREPET) << "GB/s\n";
     verify(A, N);
     memcpy(A, B, N * N * sizeof(float));
@@ -195,7 +195,7 @@ int main(int argc, char **argv)
       // TODO / A FAIRE ...
     }
     std::chrono::duration<double> time = std::chrono::high_resolution_clock::now() - start;
-    std::cout << "AVX in-place transpose with OpenMP tasks: " << time.count() << "s\n";
+    std::cout << "AVX in-place transpose with OpenMP tasks: " << 1000 * time.count() / NREPET << "ms\n";
     std::cout << "Performance: " << (long long) N * N * sizeof(float) / (1e9 * time.count() / NREPET) << "GB/s\n";
     verify(A, N);
     memcpy(A, B, N * N * sizeof(float));
