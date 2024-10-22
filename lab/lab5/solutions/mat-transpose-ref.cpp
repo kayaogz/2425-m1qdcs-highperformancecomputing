@@ -245,9 +245,7 @@ int main(int argc, char **argv)
                 for (int i1 = i; i1 < i1max; i1 += 8) {
                   int j1max = std::min(j + B1, i1 + 1);
                   for (int j1 = j; j1 < j1max; j1 += 8) {
-                    {
-                      transAVX8x8InPlace(&A[i1 * N + j1], &A[j1 * N + i1], tile, tile2, N);
-                    }
+                    transAVX8x8InPlace(&A[i1 * N + j1], &A[j1 * N + i1], tile, tile2, N);
                   }
                 }
               }
