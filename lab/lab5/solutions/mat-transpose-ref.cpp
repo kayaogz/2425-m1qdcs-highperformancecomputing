@@ -97,8 +97,8 @@ inline void transAVX8x8_ps(__m256 tile[8])
   // TODO / A FAIRE ...
   // Compute tile3 from tile2 using _mm256_shuffle_ps
   // Calculer tile3 de tile2 en utilisant _mm256_shuffle_ps
-  tile3[0] = _mm256_shuffle_ps(tile2[0], tile2[2], _MM_SHUFFLE(1, 0, 1, 0));
-  tile3[1] = _mm256_shuffle_ps(tile2[0], tile2[2], _MM_SHUFFLE(3, 2, 3, 2));
+  tile3[0] = _mm256_shuffle_ps(tile2[0], tile2[2], 0b01000100);
+  tile3[1] = _mm256_shuffle_ps(tile2[0], tile2[2], 0b11101110);
   tile3[2] = _mm256_shuffle_ps(tile2[1], tile2[3], _MM_SHUFFLE(1, 0, 1, 0));
   tile3[3] = _mm256_shuffle_ps(tile2[1], tile2[3], _MM_SHUFFLE(3, 2, 3, 2));
   tile3[4] = _mm256_shuffle_ps(tile2[4], tile2[6], _MM_SHUFFLE(1, 0, 1, 0));
@@ -235,7 +235,7 @@ int main(int argc, char **argv)
     for (int repet = 0; repet < NREPET; repet++) {
 #pragma omp parallel default(none) shared(A, N, B1, tile, tile2)
       {
-#pragma omp single
+#pragma omp for collapse(2) // Can generate tasks in parallel because all of them are independent
         {
           for (int i = 0; i < N; i += B1) {
             for (int j = 0; j <= i; j += B1) {
